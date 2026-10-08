@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Terminal Assistant</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>🔧 AI Terminal Assistant</h1>
+        <div class="presets">
+            <button class="btn-secondary" onclick="setPreset('git')">Git</button>
+            <button class="btn-secondary" onclick="setPreset('docker')">Docker</button>
+            <button class="btn-secondary" onclick="setPreset('system')">System</button>
+            <button class="btn-secondary" onclick="setPreset('network')">Network</button>
+            <button class="btn-danger" onclick="clearOutput()">Clear</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="terminal-panel">
+            <ul id="history-list" class="history-list"></ul>
+            <div id="output-panel" class="output-panel"></div>
+            <div class="command-line">
+                <span>&gt;</span>
+                <input type="text" id="command-input" placeholder="Enter command..." autofocus>
+                <button onclick="runCommand(document.getElementById('command-input').value)">Run</button>
+            </div>
+        </div>
+
+        <div class="ai-drawer">
+            <h3>AI Copilot</h3>
+
+            <div class="ai-section">
+                <h4>Natural Language to Command</h4>
+                <textarea id="ai-generate-input" placeholder="Describe what you want to do..."></textarea>
+                <button onclick="generateCommand()">Generate Command</button>
+                <div id="ai-generate-result" class="ai-result" style="margin-top:10px;"></div>
+                <button class="btn-secondary" style="margin-top:10px;" onclick="useGeneratedCommand()">Use Command</button>
+            </div>
+
+            <div class="ai-section">
+                <h4>Error Auto-Fix</h4>
+                <textarea id="ai-diagnose-input" placeholder="Paste stderr here..."></textarea>
+                <button onclick="diagnoseError()">Diagnose</button>
+                <div id="ai-diagnose-result" class="ai-result" style="margin-top:10px;"></div>
+            </div>
+
+            <div class="ai-section">
+                <h4>SSH Profiles</h4>
+                <input type="text" id="ssh-host" placeholder="Host">
+                <input type="number" id="ssh-port" placeholder="Port" value="22">
+                <input type="text" id="ssh-user" placeholder="User">
+                <input type="text" id="ssh-key" placeholder="Private key path">
+                <button onclick="saveProfile()">Save Profile</button>
+                <ul id="ssh-list" class="ssh-list"></ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>
